@@ -1,0 +1,9 @@
+a.nav-link 
+{
+    color: #1D9B97;
+    text-transform: uppercase;
+}
+a.active
+{
+   color: rgb(190, 59, 36);
+}

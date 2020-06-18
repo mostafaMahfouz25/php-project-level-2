@@ -1,0 +1,123 @@
+<IfModule mod_rewrite.c>  
+    RewriteEngine On
+    RewriteCond %{SCRIPT_FILENAME} !-d
+    RewriteCond %{SCRIPT_FILENAME} !-f
+
+    RewriteRule ^index$ ./index.php
+    RewriteRule ^courses$ ./index.php
+    RewriteRule ^contact$ ./index.php
+    RewriteRule ^send-message$ ./index.php
+
+    RewriteRule ^order/(\d+)$ ./order.php?id=$1 
+    RewriteRule ^add-order$ ./order.php
+
+
+
+
+
+
+
+
+    #admin pathes 
+    RewriteRule ^admin/home$ ./admin/index.php
+    RewriteRule ^admin/index$ ./admin/index.php
+
+    #categories pathes
+    RewriteRule ^admin/categories$ ./admin/categories.php
+    
+    RewriteRule ^admin/add-category$ ./admin/categories.php
+    RewriteRule ^admin/store-category$ ./admin/categories.php 
+    
+    RewriteRule ^admin/edit-category/(\d+)*$ ./admin/categories.php?id=$1 
+    RewriteRule ^admin/update-category*$ ./admin/categories.php
+
+    RewriteRule ^admin/delete-category/(\d+)*$ ./admin/categories.php?id=$1 
+
+
+
+
+    #courses pathes
+    RewriteRule ^admin/courses$ ./admin/courses.php
+    
+    RewriteRule ^admin/add-course$ ./admin/courses.php
+    RewriteRule ^admin/store-course$ ./admin/courses.php 
+    
+    RewriteRule ^admin/edit-course/(\d+)*$ ./admin/courses.php?id=$1 
+    RewriteRule ^admin/update-course*$ ./admin/courses.php
+
+    RewriteRule ^admin/delete-course/(\d+)*$ ./admin/courses.php?id=$1 
+
+
+    #managers pathes
+    RewriteRule ^admin/managers$ ./admin/managers.php
+    
+    RewriteRule ^admin/add-manager$ ./admin/managers.php
+    RewriteRule ^admin/store-manager$ ./admin/managers.php 
+    
+    RewriteRule ^admin/edit-manager/(\d+)*$ ./admin/managers.php?id=$1 
+    RewriteRule ^admin/update-manager*$ ./admin/managers.php
+
+    RewriteRule ^admin/delete-manager/(\d+)*$ ./admin/managers.php?id=$1 
+
+
+
+
+    #messages pathes
+    RewriteRule ^admin/messages$ ./admin/messages.php
+    RewriteRule ^admin/delete-message/(\d+)*$ ./admin/messages.php?id=$1 
+
+    #reservations pathes
+    RewriteRule ^admin/reservations$ ./admin/reservation.php
+    RewriteRule ^admin/delete-reservation/(\d+)*$ ./admin/reservation.php?id=$1 
+
+    #auth pathes
+    RewriteRule ^admin/login$ ./admin/auth.php
+    RewriteRule ^admin/do-login$ ./admin/auth.php 
+    RewriteRule ^admin/logout$ ./admin/auth.php 
+
+
+
+    #redirect not found url to 404 page
+    ErrorDocument 404 http://courses.local/404.php
+</IfModule>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#https://www.sitepoint.com/guide-url-rewriting/
+#https://www.sitepoint.com/apache-mod_rewrite-examples/
+#http://regexlib.com/CheatSheet.aspx?AspxAutoDetectCookieSupport=1
+
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+
+#… means that if the file with the specified name in the browser doesn’t exist, 
+#or the directory in the browser doesn’t exist then procede to the rewrite rule below :slight_smile:
