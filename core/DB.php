@@ -79,6 +79,7 @@ class DB
         {
             if($result->num_rows > 0)
             {
+                $this->freeQuery();
                 return (object) $result->fetch_all(MYSQLI_ASSOC);
             }
             else 
@@ -102,6 +103,7 @@ class DB
         {
             if($result->num_rows > 0)
             {
+                $this->freeQuery();
                 return $result->fetch_assoc();
             }
             else 
@@ -171,22 +173,7 @@ class DB
         $this->query = "DELETE FROM `{$this->table}` ";
         return $this;
     }
-    
 
-    // fire query and add action to mysqli
-    public function save()
-    {
-        $result = $this->conn->query($this->query);
-        // $this->conn->query(" UPDATE `courses` SET `co_title`='CCCCC' WHERE `co_id`='12' " );
-        if($this->conn->affected_rows > 0 || $result == true)
-        {
-            return true;
-        }
-        else 
-        {
-            $this->get_error();
-        }
-    }
 
 
 
@@ -201,7 +188,6 @@ class DB
         return $this;
     }
 
-
     // add limit 
 
     public function limit($n)
@@ -211,6 +197,33 @@ class DB
         return $this;
     }
 
+     
+
+
+   
+    
+
+    // fire query and add action to mysqli
+    public function save()
+    {
+        $result = $this->conn->query($this->query);
+        // $this->conn->query(" UPDATE `courses` SET `co_title`='CCCCC' WHERE `co_id`='12' " );
+        if($this->conn->affected_rows > 0 || $result == true)
+        {
+            $this->freeQuery();
+            return true;
+        }
+        else 
+        {
+            $this->get_error();
+        }
+    }
+
+
+
+ 
+
+   
 
 
 
@@ -229,6 +242,12 @@ class DB
     private function get_error()
     {
         return die("Error Occurre : ". $this->conn->error );
+    }
+
+
+    public function freeQuery()
+    {
+        $this->query = '';
     }
 
 

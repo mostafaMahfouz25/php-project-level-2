@@ -138,4 +138,17 @@ class Upload
 
 
 
+    // delete image 
+    public function deleteImage($filename)
+    {
+        if (file_exists($filename)) 
+        {
+            unlink($filename);
+            return true;
+        }
+        return false;
+    }
+
+
+
 }

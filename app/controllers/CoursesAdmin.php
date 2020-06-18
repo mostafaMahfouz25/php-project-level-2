@@ -111,7 +111,10 @@ class CoursesAdmin extends Controller
                     $data['errors'] = $this->file->showErrors();
                 }
                 else 
-                {
+                {   
+                    $row = $this->db->table("courses")->select()->where('co_id','=',$id)->getOne();
+                    $this->file->deleteImage(UPLOADS.$row['co_image']);
+
                     $dataInsert = ['co_category_id'=> $category_id,
                     'co_title'=>$title,
                     'co_description'=>$description,
@@ -151,6 +154,11 @@ class CoursesAdmin extends Controller
         $row = $this->db->table("courses")->select()->where('co_id','=',$id)->getOne();
         if(count($row))
         {
+            // delete image 
+            $this->file = new Upload;
+            $this->file->deleteImage(UPLOADS.$row['co_image']);
+
+            // delete course 
             $this->db->table("courses")->delete()->where('co_id','=',$id)->save();
             $this->session()->set("deleted-success","Deleted Success");
         }
